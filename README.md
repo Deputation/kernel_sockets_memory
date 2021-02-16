@@ -13,3 +13,14 @@ The client connects and sends packets with the regular wsa socket api present in
 
 # Tests
 A small subset of "tests" showing simply how to use the provided ``memory::virtual_controller_t`` class is present in the main() function of the client.
+
+# Getting started
+- Download VS2019 with the relevant C++ packages and the W10 SDK.
+- Download the Windows WDK and install its relevant extension.
+- Clone the project.
+- Build.
+
+# How to use
+- Create the driver's service by executing "``sc create ksocketsmem type= kernel binPath= "C:\Path\To\Your\File.sys"``" in an elevated command prompt.
+- Start the driver's service by executing "``sc start ksocketsmem``" in an elevated command prompt.
+- Open the client.
