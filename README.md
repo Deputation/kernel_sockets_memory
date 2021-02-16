@@ -2,6 +2,8 @@
 Kernel-based memory hacking framework communicating with a kernel driver via sockets, it allows for memory reading, writing, allocation, freeing, protection changing without a valid user-mode handle.
 Kernel-mode sockets kindly provided by wbenny's KSOCKET framework. Credits to him. https://github.com/wbenny/ksocket
 
+Some simple features like service unloading and complete disconnection (and cleanup) have been omitted from the project to prevent abuse by pay-to-cheat services that would abuse it for monetary gain. I'll leave these as an exercise to the reader.
+
 # Notes
 The driver was written entirely in C, while the client was written in C++. The part of the project meant to be used by people who have no idea how it works behind the scenes (the ``memory::virtual_controller_t`` class) is well documented.
 
