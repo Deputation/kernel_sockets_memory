@@ -1,7 +1,5 @@
 #pragma once
 
-#undef NDEBUG
-
 #include <iostream>
 #include <vector>
 #include <string>
