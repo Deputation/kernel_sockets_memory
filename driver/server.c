@@ -76,6 +76,8 @@ void initialize_server(uint16_t port)
 		}
 	}
 
+	log("The main thread has terminated...\n");
+
 	closesocket(server_socket);
 }
 
@@ -274,8 +276,6 @@ void server_thread(SOCKET* sockfd)
 
 		if (result > 0 && result >= sizeof(packet.header) && packet.header.magic_header == magic_header_value)
 		{
-			log("Handling packet...\n");
-
 			uint64_t packet_result = handle_packet(packet);
 
 			if (!answer_client(connection, packet_result))
@@ -284,4 +284,6 @@ void server_thread(SOCKET* sockfd)
 			}
 		}
 	}
+
+	log("A server thread has terminated...\n");
 }
