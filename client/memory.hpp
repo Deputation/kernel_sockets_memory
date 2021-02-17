@@ -33,9 +33,22 @@ namespace memory
 		/// <summary>
 		/// Get a process module's base address.
 		/// </summary>
-		/// <param name="module_name"> The module name of which you want to retrieve the base address. </param>
+		/// <param name="module_name"> The name of the module of which you want to retrieve the base address. </param>
 		/// <returns> The base address of the specified module. </returns>
 		uint64_t get_base(const wchar_t* module_name);
+
+		/// <summary>
+		/// Get the process' main module's size.
+		/// </summary>
+		/// <returns> The main module's size. </returns>
+		uint64_t get_size();
+
+		/// <summary>
+		/// Get a process module's size.
+		/// </summary>
+		/// <param name="module_name"> The name of the module of which you want to retrieve the size. </param>
+		/// <returns> The size of the module. </returns>
+		uint64_t get_size(const wchar_t* module_name);
 
 		/// <summary>
 		/// Write to the process' virtual memory.

@@ -21,6 +21,16 @@ uint64_t memory::virtual_controller_t::get_base(const wchar_t* module_name)
 	return server->get_base(this->pid, module_name);
 }
 
+uint64_t memory::virtual_controller_t::get_size()
+{
+	return server->get_size(this->pid, this->name.data());
+}
+
+uint64_t memory::virtual_controller_t::get_size(const wchar_t* module_name)
+{
+	return server->get_size(this->pid, module_name);
+}
+
 uint64_t memory::virtual_controller_t::allocate(uint32_t protection, uint32_t allocation_type, size_t size)
 {
 	return this->server->zw_allocate_virtual_memory(this->pid, protection, allocation_type, size);

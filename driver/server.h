@@ -6,6 +6,7 @@
 enum e_packet_type
 {
 	packet_get_base,
+	packet_get_size,
 	packet_copy_memory,
 	packet_allocate,
 	packet_free,
@@ -68,6 +69,12 @@ typedef struct _packet_get_base_t
 	wchar_t module_name[64];
 } packet_get_base_t, *lpacket_get_base_t;
 
+typedef struct _packet_get_size_t
+{
+	uint32_t target_pid;
+	wchar_t module_name[64];
+} packet_get_size_t, *lpacket_get_size_t;
+
 typedef struct _data_packet_t
 {
 	packet_header_t header;
@@ -80,6 +87,7 @@ typedef struct _data_packet_t
 		packet_free_memory_t free_memory;
 		packet_protect_memory_t protect_memory;
 		packet_get_base_t get_base;
+		packet_get_size_t get_size;
 	} data;
 } data_packet_t, *lpdata_packet_t;
 
@@ -94,6 +102,7 @@ uint64_t handle_allocate(data_packet_t packet);
 uint64_t handle_free(data_packet_t packet);
 uint64_t handle_protect(data_packet_t packet);
 uint64_t handle_get_base(data_packet_t packet);
+uint64_t handle_get_size(data_packet_t packet);
 
 // master handler(s)
 uint64_t handle_packet(data_packet_t packet);

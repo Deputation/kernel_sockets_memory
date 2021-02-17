@@ -8,6 +8,7 @@ namespace connection
 	enum class e_packet_type : uint32_t
 	{
 		packet_get_base,
+		packet_get_size,
 		packet_copy_memory,
 		packet_allocate,
 		packet_free,
@@ -62,6 +63,12 @@ namespace connection
 		wchar_t module_name[64];
 	};
 
+	struct packet_get_size_t
+	{
+		uint32_t target_pid;
+		wchar_t module_name[64];
+	};
+
 	struct packet_protect_memory_t
 	{
 		uint32_t target_pid;
@@ -83,6 +90,7 @@ namespace connection
 			packet_free_memory_t free_memory;
 			packet_protect_memory_t protect_memory;
 			packet_get_base_t get_base;
+			packet_get_size_t get_size;
 		} data;
 	};
 
@@ -106,6 +114,7 @@ namespace connection
 		uint64_t ping(int32_t value);
 		
 		uint64_t get_base(uint32_t target_pid, const wchar_t* module_name);
+		uint64_t get_size(uint32_t target_pid, const wchar_t* module_name);
 
 		uint64_t mm_copy_virtual_memory(uint32_t source_pid, uintptr_t source_address, uint32_t target_pid,
 			uintptr_t target_address, size_t size);

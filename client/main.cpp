@@ -1,19 +1,19 @@
 #include "common.hpp"
 
-auto value = 0x1337ull;
-
 int main(void)
 {
 	auto ksock = std::make_shared<connection::ksock_t>(55123);
 	log("KSOCK connected on port %d\n", ksock->port);
-	auto process = std::make_shared<memory::virtual_controller_t>(ksock, GetCurrentProcessId(), L"client.exe");
+	auto process = std::make_shared<memory::virtual_controller_t>(ksock, utils::get_process_id("client.exe"), L"client.exe");
 
 	log("Testing ksock connection using the virtual controller.\n");
 
 	auto secret = 0x1337u;
 
 	log("Base address (main module): %p\n", process->get_base());
+	log("Size (main module): %p\n", process->get_size());
 	log("Base address (ntdll.dll): %p\n", process->get_base(L"ntdll.dll"));
+	log("Size (ntdll.dll): %p\n", process->get_size(L"ntdll.dll"));
 	log("Read (reading secret): %p\n", process->read<uint32_t>(reinterpret_cast<uint64_t>(&secret)));
 	log("Write (changing secret): %p\n", process->write<uint32_t>(reinterpret_cast<uint64_t>(&secret), 0xCAFEBABE));
 	log("Read 2 (reading secret): %p\n", process->read<uint32_t>(reinterpret_cast<uint64_t>(&secret)));

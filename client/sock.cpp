@@ -110,6 +110,30 @@ uint64_t connection::ksock_t::get_base(uint32_t target_pid, const wchar_t* modul
 	return 0;
 }
 
+uint64_t connection::ksock_t::get_size(uint32_t target_pid, const wchar_t* module_name)
+{
+	std::wstring buffer = module_name;
+
+	data_packet_t get_size = {};
+
+	get_size.header.magic_header = magic_header_value;
+	get_size.header.type = e_packet_type::packet_get_size;
+	get_size.data.get_size.target_pid = target_pid;
+
+	memset(&get_size.data.get_size.module_name[0], 0, 64 * sizeof(wchar_t));
+	memcpy(&get_size.data.get_size.module_name[0], const_cast<wchar_t*>(buffer.data()),
+		(std::wcslen(buffer.data()) + 1) * sizeof(wchar_t));
+
+	auto result = 0ull;
+
+	if (this->send_data(get_size, result))
+	{
+		return result;
+	}
+
+	return 0;
+}
+
 uint64_t connection::ksock_t::mm_copy_virtual_memory(uint32_t source_pid, uintptr_t source_address, 
 	uint32_t target_pid, uintptr_t target_address, size_t size)
 {

@@ -213,6 +213,31 @@ uint64_t handle_get_base(data_packet_t packet)
 	return result;
 }
 
+uint64_t handle_get_size(data_packet_t packet)
+{
+	uint64_t result = 0ull;
+	PEPROCESS target;
+
+	if (NT_SUCCESS(PsLookupProcessByProcessId(packet.data.get_size.target_pid, &target)))
+	{
+		KAPC_STATE kapc;
+		KeStackAttachProcess(target, &kapc);
+		{
+			PLDR_DATA_TABLE_ENTRY entry = get_module_by_name_x64(target, packet.data.get_size.module_name);
+
+			if (entry)
+			{
+				result = entry->SizeOfImage;
+			}
+		}
+		KeUnstackDetachProcess(&kapc);
+
+		ObDereferenceObject(target);
+	}
+
+	return result;
+}
+
 uint64_t handle_packet(data_packet_t packet)
 {
 	uint64_t result = 0ull;
@@ -241,6 +266,10 @@ uint64_t handle_packet(data_packet_t packet)
 
 	case packet_get_base:
 		result = handle_get_base(packet);
+		break;
+
+	case packet_get_size:
+		result = handle_get_size(packet);
 		break;
 
 	default:

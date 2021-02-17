@@ -22,4 +22,5 @@
 
 #include "xorstr.hpp"
 #include "sock.hpp"
+#include "utils.hpp"
 #include "memory.hpp"
