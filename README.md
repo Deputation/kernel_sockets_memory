@@ -5,7 +5,7 @@ Kernel-mode sockets kindly provided by wbenny's KSOCKET framework. Credits to hi
 Some simple features like service unloading and complete disconnection (and cleanup) have been omitted from the project to prevent abuse by pay-to-cheat services that would abuse it for monetary gain. I'll leave these as an exercise to the reader.
 
 # Notes
-The driver was written entirely in C, while the client was written in C++. The part of the project meant to be used by people who have no idea how it works behind the scenes (the ``memory::virtual_controller_t`` class) is well documented.
+The driver was written entirely in C, while the client was written in C++. The part of the project meant to be used by people who have no idea how it works behind the scenes (the ``memory::virtual_controller_t`` class) is well documented. xorstr class from JustasMasiluis. Credits to him. https://github.com/JustasMasiulis/xorstr
 
 # Loading the driver
 The driver can be loaded regularly and also via DSE-bypass techniques like manual mapping, as it doesn't use any ``__try{} __except() {}`` blocks nor tries doing anything patchguard-unfriendly. Once loaded, the driver spawns a new thread for every client that would like to connect.
