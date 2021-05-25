@@ -1,4 +1,4 @@
-# kernel_sockets_memory 💻
+# kernel_sockets_memory
 Kernel-based memory hacking framework communicating with a kernel driver via sockets, it allows for memory reading, writing, allocation, freeing, protection changing without a valid user-mode handle.
 Kernel-mode sockets kindly provided by wbenny's KSOCKET framework. Credits to him. https://github.com/wbenny/ksocket
 
